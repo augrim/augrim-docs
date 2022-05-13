@@ -22,8 +22,8 @@ sed -i "s#%GPSE_ID%#$GOOGLE_PSE#g" _userconfig.yml
 
 docker build \
     --build-arg jekyll_env=production \
-    -t bitwiseio/augrim-docs \
+    -t augrim/augrim-docs \
     -f ci/website.dockerfile \
     .
 
-docker push bitwiseio/augrim-docs
+docker push augrim/augrim-docs
