@@ -4,12 +4,9 @@
   https://creativecommons.org/licenses/by/4.0/
 -->
 <header id="header" class="navbar navbar-expand flex-column flex-md-row">
-    <a class="navbar-brand" href="{% link index.md %}"><img src="/logos/svg/augrim_logo.svg" height="36"></a>
+    <a class="navbar-brand" href="{% link index.md %}"><img src="/logos/svg/augrim_logo_wordmark.svg" height="36"></a>
     <div class="navbar-nav-scroll ml-md-auto">
         <ul class="navbar-nav flex-row"><li class="nav-item">
-            {% assign dir = page.dir | slice: 0, 10 %}
-            <a class="nav-link{% if dir == '/releases/' %} active{% endif %}" href="/releases/{{ site.data.general.latest_version }}/"><span>Releases</span></a>
-        </li><li class="nav-item">
             {% assign dir = page.dir | slice: 0, 6 %}
             <a class="nav-link{% if dir == '/docs/' %} active{% endif %}" href="/docs/{{ site.data.general.latest_version }}/"><span>Documentation</span></a>
         </li><li class="nav-item">

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="1144 1266 970 251" width="970" height="251">
+  <defs/>
+  <g id="Canvas_89" fill-opacity="1" stroke-dasharray="none" stroke="none" stroke-opacity="1" fill="none">
+    <title>Augrim Logo</title>
+    <g id="Canvas_89_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_24">
+        <g id="Graphic_2">
+          <rect x="1248.5" y="1290" width="80.37037" height="70" fill="#fee476"/>
+          <rect x="1248.5" y="1290" width="80.37037" height="70" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+        <g id="Line_8">
+          <line x1="1317.5766" y1="1363" x2="1361.2938" y2="1420.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+        <g id="Graphic_17">
+          <rect x="1350" y="1423.5" width="80.37037" height="70" fill="#fee476"/>
+          <rect x="1350" y="1423.5" width="80.37037" height="70" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+        <g id="Graphic_19">
+          <rect x="1147" y="1423.5" width="80.37037" height="70" fill="#fee476"/>
+          <rect x="1147" y="1423.5" width="80.37037" height="70" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+        <g id="Line_20">
+          <line x1="1230.3704" y1="1458.5" x2="1347" y2="1458.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+        <g id="Line_21">
+          <line x1="1216.0766" y1="1420.5" x2="1259.7938" y2="1363" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+        </g>
+      </g>
+      <g id="Graphic_23">
+        <text transform="translate(1525 1271.75)" fill="black">
+          <tspan font-family="Hoefler Text" font-size="200" fill="black" x="0" y="184">augrim</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

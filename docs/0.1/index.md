@@ -1,35 +1,18 @@
----
-tags: [Mermaid]
-mermaid: true
----
+# Introduction
 
-# ETAOIN SHRDLU
+<!--
+  Copyright 2022 Cargill Incorporated
+  Licensed under Creative Commons Attribution 4.0 International License
+  https://creativecommons.org/licenses/by/4.0/
+-->
 
-Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam 
-nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas 
-nulla pariatur?
+Augrim is a collection of reusable consensus algorithms.
 
-<div class="mermaid">
-sequenceDiagram
-    participant CE as Coordinator Component
-    participant C as Coordinator Algorithm
-    participant P as Participant Algorithm
-    participant PE as Participant Component
+## Using Augrim's Algorithms
 
+To use an algorithm, your application will commonly need to do two primary things:
 
-    CE->>+C: Start(value)
-    rect rgb(180, 200, 255)
-    Note over C,P: Vote Phase
-    C->>+P: VoteRequest(epoch, value)
-    P->>+PE: RequestForVote(value)
-    PE-->>-P: Vote(vote=true)
-    P-->>-C: VoteResponse(epoch, vote=true)
-    end
-    rect rgb(180, 200, 255)
-    Note over C, P: Commit Phase
-    C->>+CE: RequestForVote()
-    CE-->>-C: Vote(vote=true)
-    C->>P: Commit(epoch)
-    end
-    C-->>-CE: RequestForStart()
-</div>
+- Input events into the `Algorithm::event` method.
+- Process the list of actions returned by the `Algorithm::event` method.
+
+The specific actions and events differ by algorithm; refer to the algorithm's documentation.

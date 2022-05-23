@@ -13,7 +13,7 @@ The algorithm attempts to faithfully implement 2PC as it is described in the
 following sources:
 
 - Bernstein, Hadzilacos, and Goodman, Concurrency Control and Recovery in
-- Database Systems, 7.4.  This book may be downloaded for free from
+  Database Systems, 7.4.  This book may be downloaded for free from
   <https://www.microsoft.com/en-us/research/people/philbe/>.
 
 Additional references:
