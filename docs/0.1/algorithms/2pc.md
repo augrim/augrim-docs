@@ -67,6 +67,46 @@ sends an Abort message to all the other participants.
 
 Then the next epoch begins.
 
+## States
+
+### Coordinator
+
+<div class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> WaitingForStart
+    WaitingForStart --> Voting: Start
+    Voting --> WaitingForVote
+    Voting --> Abort: Timeout
+    WaitingForVote --> WaitingForVote: Message(Vote)
+    state decision &lt;&lt;choice&gt;&gt;
+    WaitingForVote --> decision
+    decision --> Abort: Any Vote=No
+    decision --> Commit: All Votes=Yes
+    state join_start &lt;&lt;join&gt;&gt;
+    Abort --> join_start
+    Commit --> join_start
+    join_start --> WaitingForStart
+</div>
+
+### Participant
+
+<div class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> WaitingForVoteRequest
+    WaitingForVoteRequest --> WaitingForVote: VoteRequest
+    WaitingForVote --> Voted: Vote=Yes
+    WaitingForVote --> Abort: Vote=No
+    Voted --> Voted: Timeout, Send DecisionRequest
+    Voted --> Abort: Message(Abort)
+    Voted --> Commit: Message(Commit)
+    state join_start &lt;&lt;join&gt;&gt;
+    Abort --> join_start
+    Commit --> join_start
+    join_start --> WaitingForVoteRequest
+</div>
+
 ## Example Sequences
 
 ### 2 Processes Committing
