@@ -76,17 +76,23 @@ stateDiagram-v2
     direction LR
     [*] --> WaitingForStart
     WaitingForStart --> Voting: Start
-    Voting --> WaitingForVote
-    Voting --> Abort: Timeout
-    WaitingForVote --> WaitingForVote: Message(Vote)
+    Voting --> Abort: Alarm + Timeout
+    Voting --> Voting: Deliver(Vote)
     state decision &lt;&lt;choice&gt;&gt;
-    WaitingForVote --> decision
-    decision --> Abort: Any Vote=No
-    decision --> Commit: All Votes=Yes
-    state join_start &lt;&lt;join&gt;&gt;
-    Abort --> join_start
-    Commit --> join_start
-    join_start --> WaitingForStart
+    Voting --> decision
+    decision --> Abort: Any Participant Vote = No
+    decision --> WaitingForVote: All Participant Votes = Yes
+    state decision2 &lt;&lt;choice&gt;&gt;
+    WaitingForVote --> decision2
+    decision2 --> Abort: Coordinator Vote = No
+    decision2 --> Commit: Coordinator Vote = Yes
+    state join_ack &lt;&lt;join&gt;&gt;
+    Abort --> join_ack
+    Commit --> join_ack
+    state "WaitingForDecisionAck" as wfda
+    join_ack --> wfda
+    wfda --> wfda: Deliver(DecisionAck)
+    wfda --> WaitingForStart: Alarm + Timeout or All Participants Acked
 </div>
 
 ### Participant
@@ -95,16 +101,16 @@ stateDiagram-v2
 stateDiagram-v2
     direction LR
     [*] --> WaitingForVoteRequest
-    WaitingForVoteRequest --> WaitingForVote: VoteRequest
-    WaitingForVote --> Voted: Vote=Yes
-    WaitingForVote --> Abort: Vote=No
-    Voted --> Voted: Timeout, Send DecisionRequest
-    Voted --> Abort: Message(Abort)
-    Voted --> Commit: Message(Commit)
+    WaitingForVoteRequest --> WaitingForVote: Deliver(VoteRequest)
+    WaitingForVote --> Voted: This Participant's Vote = Yes
+    WaitingForVote --> Abort: This Participant's Vote = No
+    Voted --> Voted: On Alarm + Timeout send DecisionRequest
+    Voted --> Abort: Deliver(Abort)
+    Voted --> Commit: Deliver(Commit)
     state join_start &lt;&lt;join&gt;&gt;
     Abort --> join_start
     Commit --> join_start
-    join_start --> WaitingForVoteRequest
+    join_start --> WaitingForVoteRequest: Send DecisionAck
 </div>
 
 ## Example Sequences
