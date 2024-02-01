@@ -28,20 +28,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_lint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.3'
+          bundler-cache: true
       - name: Install Just
         run: sudo snap install --edge --classic just
+      - name: Install mdl
+        run: gem install mdl
       - name: Run Lint
         run: just lint
 
-  test_build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.3'
+          bundler-cache: true
       - name: Install Just
         run: sudo snap install --edge --classic just
-      - name: Test Building Deployable site
+      - name: Build
         run: just build
