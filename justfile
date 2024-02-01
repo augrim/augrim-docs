@@ -1,4 +1,4 @@
-# Copyright 2021-2022 Cargill Incorporated
+# Copyright 2023-2024 Bitwise IO, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,25 +12,73 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-build: docker-build
+build: build-jekyll
 
-docker-build:
-    docker build \
-        -t bitwiseio/augrim-docs \
-        -f ci/website.dockerfile \
-        .
+build-jekyll:
+    #!/usr/bin/env sh
+    set -e
 
-docker-lint:
-    docker-compose \
-        -f docker/compose/run-lint.yaml \
-        up \
-        --abort-on-container-exit \
-        --build \
-        lint-augrim-docs
+    if [ $(uname -s) = "Darwin" ]; then
+        export RUBY_VERSION=3.1.3
+        source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+        chruby ruby-$RUBY_VERSION
+    fi
 
-docker-run:
-    docker-compose up --build; docker-compose down
+    bundle install
+    bundle exec jekyll build
 
-lint: docker-lint
+clean:
+    rm -rf \
+        .jekyll-metadata/ \
+        _site/ \
+        Gemfile.lock
 
-run: docker-run
+install-jekyll-via-brew:
+    #!/usr/bin/env sh
+    set -e
+
+    brew install chruby ruby-install xz
+
+    export RUBY_VERSION=3.1.3
+    ruby-install ruby $RUBY_VERSION --no-reinstall --cleanup
+    source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+    chruby ruby-$RUBY_VERSION
+
+    gem install jekyll bundler mdl
+
+install-mdl:
+    #!/usr/bin/env sh
+    set -e
+
+    if [ $(uname -s) = "Darwin" ]; then
+        export RUBY_VERSION=3.1.3
+        source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+        chruby ruby-$RUBY_VERSION
+    fi
+
+    gem install mdl
+
+run:
+    #!/usr/bin/env sh
+    set -e
+
+    if [ $(uname -s) = "Darwin" ]; then
+        export RUBY_VERSION=3.1.3
+        source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+        chruby ruby-$RUBY_VERSION
+    fi
+
+    bundle install
+    bundle exec jekyll serve --incremental
+
+lint:
+    #!/usr/bin/env sh
+    set -e
+
+    if [ $(uname -s) = "Darwin" ]; then
+        export RUBY_VERSION=3.1.3
+        source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+        chruby ruby-$RUBY_VERSION
+    fi
+
+    mdl -g -i -r ~MD002,~MD022,~MD004,~MD007,~MD033 .
