@@ -27,9 +27,6 @@ concurrency:
   group: "${{ github.ref }}-${{ github.workflow }}"
   cancel-in-progress: true
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
 
   run_lint:
